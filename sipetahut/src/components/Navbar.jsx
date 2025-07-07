@@ -36,7 +36,7 @@ export default function Navbar({ activePage }) {
     <nav className="bg-dark_green shadow-md sticky top-0 z-50">
       <div className="mx-auto flex h-20 items-center justify-between px-4 md:px-[120px]">
         <a href="#" className="flex-shrink-0 flex items-center">
-          <img src={Logo} alt="Logo Provinsi Lampung" className="h-10 mr-3" />
+          <img src={Logo} alt="Logo Provinsi Lampung" className="h-8 mr-3" />
           <span className="text-white font-bold text-xl tracking-wider">
             SIPETAHUT Lampung
           </span>

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Logo from '../assets/logo_prov_lampung.png';
+import Profpic from '../assets/mock_profile_picture.png';
 import SmallButton from './SmallButton';
-import { FiMenu, FiX } from 'react-icons/fi';
+import { FiMenu, FiX, FiChevronDown } from 'react-icons/fi';
+import ProfileDropdown from './ProfileDropdown';
 
 const navLinks = [
   { name: 'Beranda', href: '#' },
@@ -9,23 +11,38 @@ const navLinks = [
   { name: 'Informasi', href: '#' },
 ];
 
+// DUMMY LOGIN PETANI
+const loggedInUser = {
+  name: 'Tepani Canzz',
+  profilePic: Profpic,
+};
+
 export default function Navbar({ activePage }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // State simpan data user, null = belum login, dah login = loggedInUser
+  const [user, setUser] = useState(loggedInUser);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+
+  // --- SIMULASI LOGIN BLM ---
+  const handleLogin = () => setUser(loggedInUser);
+  const handleLogout = () => {
+    setUser(null);
+    setIsMenuOpen(false);
+    setIsProfileMenuOpen(false);
+  };
+  // ------------------------------------
 
   return (
     <nav className="bg-dark_green shadow-md sticky top-0 z-50">
       <div className="mx-auto flex h-20 items-center justify-between px-4 md:px-[120px]">
-        
-        <div className="flex-shrink-0">
-          <a href="#" className="flex items-center">
-            <img src={Logo} alt="Logo Provinsi Lampung" className="h-8 mr-3" />
-            <span className="text-white font-bold text-md tracking-wider">
-              SIPETAHUT Lampung
-            </span>
-          </a>
-        </div>
+        <a href="#" className="flex-shrink-0 flex items-center">
+          <img src={Logo} alt="Logo Provinsi Lampung" className="h-10 mr-3" />
+          <span className="text-white font-bold text-xl tracking-wider">
+            SIPETAHUT Lampung
+          </span>
+        </a>
 
-        {/* Nav Desktop */}
+        {/* Desktop - Nav */}
         <div className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => {
             const isActive = link.name === activePage;
@@ -47,34 +64,35 @@ export default function Navbar({ activePage }) {
           })}
         </div>
 
-        {/* Button Masuk Desktop */}
+        {/* Desktop - Masuk atau Profil */}
         <div className="hidden md:block">
-          <SmallButton text="Masuk" type="submit" />
+          {user ? (
+            <ProfileDropdown user={user} onLogout={handleLogout} />
+          ) : (
+            <SmallButton text="Masuk" onClick={handleLogin} />
+          )}
         </div>
 
-        {/* Button Hamburger Mobile */}
+        {/* Mobile - Hamburger */}
         <div className="md:hidden">
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-white focus:outline-none"
-          >
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white">
             {isMenuOpen ? <FiX size={28} /> : <FiMenu size={28} />}
           </button>
         </div>
       </div>
 
-      {/* Nav Mobile */}
+      {/* Mobile - Nav */}
       {isMenuOpen && (
-        <div className="md:hidden bg-dark_green px-4 pb-4 space-y-2">
-          {navLinks.map((link) => {
+        <div className="md:hidden bg-dark_green px-4 pb-4 ">
+          <div className="space-y-2">
+            {navLinks.map((link) => {
             const isActive = link.name === activePage;
             return (
               <div key={link.name} className="flex justify-center">
                 <a
                   href={link.href}
                   className={`relative inline-flex flex-col items-center py-2 px-4 
-                    font-medium transition-colors duration-300
-                    ${isActive ? 'text-white' : 'text-white hover:text-brown'}
+                    font-medium transition-colors duration-300 text-white hover:text-brown
                   `}
                 >
                   <span>{link.name}</span>
@@ -88,8 +106,41 @@ export default function Navbar({ activePage }) {
               </div>
             );
           })}
-          <div className="pt-4 flex justify-center">
-            <SmallButton text="Masuk" type="submit" />
+          </div>
+
+          <div className="my-4 border-t border-white/10"></div>
+          {/* User Account */}
+          <div>
+            {user ? (
+              <div className="flex flex-col items-center">
+                <button
+                  onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
+                  className="flex items-center p-2 rounded-lg"
+                >
+                  <img src={user.profilePic} alt="Profil" className="h-10 w-10 rounded-full object-cover items-center space-x-3" />
+                  <FiChevronDown 
+                    className={`text-white transition-transform duration-300 ${isProfileMenuOpen ? 'rotate-180' : ''}`} 
+                  />
+                </button>
+
+                {/* Sub-Nav extended profpic */}
+                <div 
+                  className={`overflow-hidden transition-all duration-300 ease-in-out
+                    ${isProfileMenuOpen ? 'max-h-40' : 'max-h-0'}
+                  `}
+                >
+                  <div className="pt-2 space-y-2">
+                    <a href="#" className="block text-center text-white/80 hover:text-brown p-2">Profil</a>
+                    <a href="#" className="block text-center text-white/80 hover:text-brown p-2">Dashboard</a>
+                    <button onClick={handleLogout} className="block w-full text-center text-white/80 hover:text-brown p-2">
+                      Keluar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <SmallButton text="Masuk" />
+            )}
           </div>
         </div>
       )}

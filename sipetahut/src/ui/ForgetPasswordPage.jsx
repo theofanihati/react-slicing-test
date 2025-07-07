@@ -28,6 +28,7 @@ const ForgetPasswordPage = () => {
             <h2 className="text-xl font-medium text-white">SIPETAHUT Lampung</h2>
           </div>
 
+        <h3 className="text-white mb-1 text-center">Silahkan masukkan email</h3>                    
           <TextField
             type={showEmail ? 'text' : 'email'}
             placeholder="Email"

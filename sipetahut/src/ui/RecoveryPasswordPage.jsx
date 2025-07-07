@@ -33,6 +33,7 @@ const RecoveryPasswordPage = () => {
                         <h2 className="text-xl font-medium text-white">SIPETAHUT Lampung</h2>
                     </div>
 
+                    <h3 className="text-white mb-1">Silahkan masukkan password baru</h3>
                     <TextField
                         type={showNewPassword ? 'text' : 'password'}
                         placeholder="Password Baru"
@@ -44,6 +45,7 @@ const RecoveryPasswordPage = () => {
                         required
                     />
 
+                    <h3 className="text-white mb-1">Ketik ulang password</h3>
                     <TextField
                         type={showConfirmPassword ? 'text' : 'password'}
                         placeholder="Konfirmasi Password"
@@ -55,7 +57,7 @@ const RecoveryPasswordPage = () => {
                         required
                     />
 
-                    <Button text="Kirim" type="submit" />
+                    <Button text="Kirim" type="submit"/>
                 </form>
             </div>
         </div>

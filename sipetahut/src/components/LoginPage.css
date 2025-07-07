@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.login-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../assets/pine_forest_background.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.login-form-wrapper {
+  background: rgba(0, 0, 0, 0);
+  padding: 40px;
+  border-radius: 20px;
+  /* Efek Kaca Buram (Glassmorphism) */
+  /* background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); */
+}
+
+.login-form {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  width: 80px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.title {
+  color: #ffffff;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+
+.input-group {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.25rem;
+}
+
+.input-group .icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #f0f0f0;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 15px 20px 15px 50px; /* Padding kiri untuk ikon */
+  border: none;
+  border-radius: 30px;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  font-size: 1rem;
+  outline: none;
+}
+
+.input-group input::placeholder {
+  color: #e0e0e0;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #f0f0f0;
+  cursor: pointer;
+}
+
+.login-button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 30px;
+  background-color: #C88A57;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: normal;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.login-button:hover {
+  background-color: #AF7645;
+}
+
+.forgot-password-link {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.forgot-password-link:hover {
+  text-decoration: underline;
+}
